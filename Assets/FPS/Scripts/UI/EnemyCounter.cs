@@ -1,22 +1,26 @@
-﻿using UnityEngine;
+﻿using Unity.FPS.AI;
+using Unity.FPS.Game;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyCounter : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    [Header("Enemies")]
-    [Tooltip("Text component for displaying enemy objective progress")]
-    public Text enemiesText;
-
-    EnemyManager m_EnemyManager;
-
-    void Awake()
+    public class EnemyCounter : MonoBehaviour
     {
-        m_EnemyManager = FindObjectOfType<EnemyManager>();
-        DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyCounter>(m_EnemyManager, this);
-    }
+        [Header("Enemies")] [Tooltip("Text component for displaying enemy objective progress")]
+        public Text EnemiesText;
 
-    void Update()
-    {
-        enemiesText.text = m_EnemyManager.numberOfEnemiesRemaining + "/" + m_EnemyManager.numberOfEnemiesTotal;
+        EnemyManager m_EnemyManager;
+
+        void Awake()
+        {
+            m_EnemyManager = FindObjectOfType<EnemyManager>();
+            DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyCounter>(m_EnemyManager, this);
+        }
+
+        void Update()
+        {
+            EnemiesText.text = m_EnemyManager.NumberOfEnemiesRemaining + "/" + m_EnemyManager.NumberOfEnemiesTotal;
+        }
     }
 }

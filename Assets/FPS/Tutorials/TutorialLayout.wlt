@@ -427,7 +427,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/FPS
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Davide\AppData\Local\Temp\d5569b87b1ce655428323a0e9b24f5e7
+  m_LastProjectPath: D:\FPS Unity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:

@@ -1,33 +1,40 @@
-﻿using UnityEngine;
+﻿using Unity.FPS.Game;
+using Unity.FPS.Gameplay;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class JetpackCounter : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    [Tooltip("Image component representing jetpack fuel")]
-    public Image jetpackFillImage;
-    [Tooltip("Canvas group that contains the whole UI for the jetack")]
-    public CanvasGroup mainCanvasGroup;
-    [Tooltip("Component to animate the color when empty or full")]
-    public FillBarColorChange fillBarColorChange;
-
-    Jetpack m_Jetpack;
-
-    void Awake()
+    public class JetpackCounter : MonoBehaviour
     {
-        m_Jetpack = FindObjectOfType<Jetpack>();
-        DebugUtility.HandleErrorIfNullFindObject<Jetpack, JetpackCounter>(m_Jetpack, this);
+        [Tooltip("Image component representing jetpack fuel")]
+        public Image JetpackFillImage;
 
-        fillBarColorChange.Initialize(1f, 0f);
-    }
+        [Tooltip("Canvas group that contains the whole UI for the jetack")]
+        public CanvasGroup MainCanvasGroup;
 
-    void Update()
-    {
-        mainCanvasGroup.gameObject.SetActive(m_Jetpack.isJetpackUnlocked);
+        [Tooltip("Component to animate the color when empty or full")]
+        public FillBarColorChange FillBarColorChange;
 
-        if (m_Jetpack.isJetpackUnlocked)
+        Jetpack m_Jetpack;
+
+        void Awake()
         {
-            jetpackFillImage.fillAmount = m_Jetpack.currentFillRatio;
-            fillBarColorChange.UpdateVisual(m_Jetpack.currentFillRatio);
+            m_Jetpack = FindObjectOfType<Jetpack>();
+            DebugUtility.HandleErrorIfNullFindObject<Jetpack, JetpackCounter>(m_Jetpack, this);
+
+            FillBarColorChange.Initialize(1f, 0f);
+        }
+
+        void Update()
+        {
+            MainCanvasGroup.gameObject.SetActive(m_Jetpack.IsJetpackUnlocked);
+
+            if (m_Jetpack.IsJetpackUnlocked)
+            {
+                JetpackFillImage.fillAmount = m_Jetpack.CurrentFillRatio;
+                FillBarColorChange.UpdateVisual(m_Jetpack.CurrentFillRatio);
+            }
         }
     }
 }

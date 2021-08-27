@@ -1,27 +1,32 @@
-﻿using UnityEngine;
+﻿using Unity.FPS.Game;
+using UnityEngine;
 
-public class CompassElement : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    [Tooltip("The marker on the compass for this element")]
-    public CompassMarker compassMarkerPrefab;
-    [Tooltip("Text override for the marker, if it's a direction")]
-    public string textDirection;
-
-    Compass m_Compass;
-
-    void Awake()
+    public class CompassElement : MonoBehaviour
     {
-        m_Compass = FindObjectOfType<Compass>();
-        DebugUtility.HandleErrorIfNullFindObject<Compass, CompassElement>(m_Compass, this);
+        [Tooltip("The marker on the compass for this element")]
+        public CompassMarker CompassMarkerPrefab;
 
-        var markerInstance = Instantiate(compassMarkerPrefab);
+        [Tooltip("Text override for the marker, if it's a direction")]
+        public string TextDirection;
 
-        markerInstance.Initialize(this, textDirection);
-        m_Compass.RegisterCompassElement(transform, markerInstance);
-    }
+        Compass m_Compass;
 
-    void OnDestroy()
-    {
-        m_Compass.UnregisterCompassElement(transform);
+        void Awake()
+        {
+            m_Compass = FindObjectOfType<Compass>();
+            DebugUtility.HandleErrorIfNullFindObject<Compass, CompassElement>(m_Compass, this);
+
+            var markerInstance = Instantiate(CompassMarkerPrefab);
+
+            markerInstance.Initialize(this, TextDirection);
+            m_Compass.RegisterCompassElement(transform, markerInstance);
+        }
+
+        void OnDestroy()
+        {
+            m_Compass.UnregisterCompassElement(transform);
+        }
     }
 }

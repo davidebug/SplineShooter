@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &872865136813590681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2620131183356007192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33498356859fc2040b30fc2e60beac7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1953073436781685708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b7698ec50c85c44a849a968dc1d57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compassMarkerPrefab: {fileID: 5587066761853311987, guid: 17f7957746eb62b4fa1ebe22ad280c34,
+  CompassMarkerPrefab: {fileID: 5587066761853311987, guid: 17f7957746eb62b4fa1ebe22ad280c34,
     type: 3}
-  textDirection: 
+  TextDirection: 
 --- !u!114 &6082123235837691375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,13 +24,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2620131183356007192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7535462baa2ed0d469f708cbe145b720, type: 3}
+  m_Script: {fileID: 11500000, guid: 33498356859fc2040b30fc2e60beac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Pickup the Jetpack
-  description: Optional
-  isOptional: 1
-  delayVisible: 0
+  Title: Pickup the Jetpack
+  Description: Optional
+  IsOptional: 1
+  DelayVisible: 0
+  ItemToPickup: {fileID: 2620131183356007192}
 --- !u!1001 &2792502641179821425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +43,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VFX_PickupSparkles
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210296609234999804, guid: 4d1efaa062e333f4cbc4c3564702d135,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6409866517097999930, guid: 4d1efaa062e333f4cbc4c3564702d135,
         type: 3}
@@ -110,11 +104,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6210296609234999804, guid: 4d1efaa062e333f4cbc4c3564702d135,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d1efaa062e333f4cbc4c3564702d135, type: 3}
 --- !u!1001 &6165879051106101842
@@ -124,6 +113,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2402080302446883653, guid: d771f03a2656e194fba5a444d5a3d9e7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431849209869673682, guid: d771f03a2656e194fba5a444d5a3d9e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8200220640316782922, guid: d771f03a2656e194fba5a444d5a3d9e7,
         type: 3}
       propertyPath: m_Name
@@ -182,16 +181,6 @@ PrefabInstance:
     - target: {fileID: 8200220640316782925, guid: d771f03a2656e194fba5a444d5a3d9e7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402080302446883653, guid: d771f03a2656e194fba5a444d5a3d9e7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431849209869673682, guid: d771f03a2656e194fba5a444d5a3d9e7,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

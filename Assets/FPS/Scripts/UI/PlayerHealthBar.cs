@@ -1,27 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Unity.FPS.Game;
+using Unity.FPS.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    [Tooltip("Image component dispplaying current health")]
-    public Image healthFillImage;
-
-    Health m_PlayerHealth;
-
-    private void Start()
+    public class PlayerHealthBar : MonoBehaviour
     {
-        PlayerCharacterController playerCharacterController = GameObject.FindObjectOfType<PlayerCharacterController>();
-        DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, PlayerHealthBar>(playerCharacterController, this);
+        [Tooltip("Image component dispplaying current health")]
+        public Image HealthFillImage;
 
-        m_PlayerHealth = playerCharacterController.GetComponent<Health>();
-        DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerHealthBar>(m_PlayerHealth, this, playerCharacterController.gameObject);
-    }
+        Health m_PlayerHealth;
 
-    void Update()
-    {
-        // update health bar value
-        healthFillImage.fillAmount = m_PlayerHealth.currentHealth / m_PlayerHealth.maxHealth;
+        void Start()
+        {
+            PlayerCharacterController playerCharacterController =
+                GameObject.FindObjectOfType<PlayerCharacterController>();
+            DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, PlayerHealthBar>(
+                playerCharacterController, this);
+
+            m_PlayerHealth = playerCharacterController.GetComponent<Health>();
+            DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerHealthBar>(m_PlayerHealth, this,
+                playerCharacterController.gameObject);
+        }
+
+        void Update()
+        {
+            // update health bar value
+            HealthFillImage.fillAmount = m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth;
+        }
     }
 }

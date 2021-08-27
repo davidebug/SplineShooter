@@ -1,27 +1,31 @@
-﻿using UnityEngine;
+﻿using Unity.FPS.Game;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MenuNavigation : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    public Selectable defaultSelection;
-
-    void Start()
+    public class MenuNavigation : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        EventSystem.current.SetSelectedGameObject(null);
-    }
+        public Selectable DefaultSelection;
 
-    void LateUpdate()
-    {
-        if (EventSystem.current.currentSelectedGameObject == null)
+        void Start()
         {
-            if (Input.GetButtonDown(GameConstants.k_ButtonNameSubmit)
-                || Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal) != 0
-                || Input.GetAxisRaw(GameConstants.k_AxisNameVertical) != 0)
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        void LateUpdate()
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
             {
-                EventSystem.current.SetSelectedGameObject(defaultSelection.gameObject);
+                if (Input.GetButtonDown(GameConstants.k_ButtonNameSubmit)
+                    || Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal) != 0
+                    || Input.GetAxisRaw(GameConstants.k_AxisNameVertical) != 0)
+                {
+                    EventSystem.current.SetSelectedGameObject(DefaultSelection.gameObject);
+                }
             }
         }
     }

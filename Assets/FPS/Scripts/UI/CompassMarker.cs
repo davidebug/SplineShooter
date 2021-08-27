@@ -1,54 +1,58 @@
-﻿using UnityEngine;
+﻿using Unity.FPS.AI;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class CompassMarker : MonoBehaviour
+namespace Unity.FPS.UI
 {
-    [Tooltip("Main marker image")]
-    public Image mainImage;
-    [Tooltip("Canvas group for the marker")]
-    public CanvasGroup canvasGroup;
-
-    [Header("Enemy element")]
-    [Tooltip("Default color for the marker")]
-    public Color defaultColor;
-    [Tooltip("Alternative color for the marker")]
-    public Color altColor;
-
-    [Header("Direction element")]
-    [Tooltip("Use this marker as a magnetic direction")]
-    public bool isDirection;
-    [Tooltip("Text content for the direction")]
-    public TMPro.TextMeshProUGUI textContent;
-
-    EnemyController m_EnemyController;
-
-    public void Initialize(CompassElement compassElement, string textDirection)
+    public class CompassMarker : MonoBehaviour
     {
-        if (isDirection && textContent)
-        {
-            textContent.text = textDirection;
-        }
-        else
-        {
-            m_EnemyController = compassElement.transform.GetComponent<EnemyController>();
+        [Tooltip("Main marker image")] public Image MainImage;
 
-            if (m_EnemyController)
+        [Tooltip("Canvas group for the marker")]
+        public CanvasGroup CanvasGroup;
+
+        [Header("Enemy element")] [Tooltip("Default color for the marker")]
+        public Color DefaultColor;
+
+        [Tooltip("Alternative color for the marker")]
+        public Color AltColor;
+
+        [Header("Direction element")] [Tooltip("Use this marker as a magnetic direction")]
+        public bool IsDirection;
+
+        [Tooltip("Text content for the direction")]
+        public TMPro.TextMeshProUGUI TextContent;
+
+        EnemyController m_EnemyController;
+
+        public void Initialize(CompassElement compassElement, string textDirection)
+        {
+            if (IsDirection && TextContent)
             {
-                m_EnemyController.onDetectedTarget += DetectTarget;
-                m_EnemyController.onLostTarget += LostTarget;
+                TextContent.text = textDirection;
+            }
+            else
+            {
+                m_EnemyController = compassElement.transform.GetComponent<EnemyController>();
 
-                LostTarget();
+                if (m_EnemyController)
+                {
+                    m_EnemyController.onDetectedTarget += DetectTarget;
+                    m_EnemyController.onLostTarget += LostTarget;
+
+                    LostTarget();
+                }
             }
         }
-    }
 
-    public void DetectTarget()
-    {
-        mainImage.color = altColor;
-    }
+        public void DetectTarget()
+        {
+            MainImage.color = AltColor;
+        }
 
-    public void LostTarget()
-    {
-        mainImage.color = defaultColor;
+        public void LostTarget()
+        {
+            MainImage.color = DefaultColor;
+        }
     }
 }

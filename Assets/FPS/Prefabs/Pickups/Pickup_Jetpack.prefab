@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8200220640316782925}
   - component: {fileID: 8200220640316782926}
   - component: {fileID: 8200220640316782927}
-  - component: {fileID: 8200220640316782920}
   - component: {fileID: 3637301713060460815}
   m_Layer: 0
   m_Name: Pickup_Jetpack
@@ -64,23 +63,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8200220640316782920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200220640316782922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72a2c2e0f8c9194f9ab3b97752e8fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verticalBobFrequency: 1
-  bobbingAmount: 0.3
-  rotatingSpeed: 360
-  pickupSFX: {fileID: 8300000, guid: 9c793d7183ca03e4fbf328175291cee4, type: 3}
-  pickupVFXPrefab: {fileID: 0}
 --- !u!114 &3637301713060460815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +75,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5fd1bc5d131a34791bbd68d41d568f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VerticalBobFrequency: 1
+  BobbingAmount: 0.3
+  RotatingSpeed: 360
+  PickupSfx: {fileID: 8300000, guid: 9c793d7183ca03e4fbf328175291cee4, type: 3}
+  PickupVfxPrefab: {fileID: 0}
 --- !u!1001 &2402080302446488005
 PrefabInstance:
   m_ObjectHideFlags: 0

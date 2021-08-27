@@ -12,49 +12,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0885f594ab85594caa28e1a96cbe0d8, type: 3}
   m_Name: WelcomeDialog
   m_EditorClassIdentifier: 
-  m_Icon: {fileID: 2800000, guid: 4c7cbe18ed8044725bafa532fbd5ec8e, type: 3}
-  m_Title: 
-  m_Paragraphs:
-    m_Items:
-    - m_Type: 0
-      m_Summary: 
-      m_Text: "<size=26><b>Get Started with Unity</b></size>\x03\x03\n\n<size=14><color=grey><b>FPS
-        MICRO-GAME</b></color></size>\x03\x03\n\n\n<size=14>Are you ready to make
-        your very own version of this FPS micro-game?  \n\nTo help you along the way,
-        this project contains interactive tutorials that will teach you about the
-        basics of the Unity Engine.</size>"
-      m_TutorialButtonText: 
-      m_Tutorial: {fileID: 0}
-      m_Icons:
-        m_Items: []
-      m_Image: {fileID: 0}
-      m_Video: {fileID: 0}
-      m_CriteriaCompletion: 0
-      m_Criteria:
-        m_Items: []
-      m_MaskingSettings:
-        m_MaskingEnabled: 0
-        m_UnmaskedViews: []
-    - m_Type: 0
-      m_Summary: 
-      m_Text: '<size=14>You can access the Tutorials window any time from the Unity
-        <b>main menu</b>:
-
-
-        <b>Tutorials</b><color=grey> > </color> <b>Show Tutorials</b></size>
-
-'
-      m_TutorialButtonText: 
-      m_Tutorial: {fileID: 0}
-      m_Icons:
-        m_Items: []
-      m_Image: {fileID: 0}
-      m_Video: {fileID: 0}
-      m_CriteriaCompletion: 0
-      m_Criteria:
-        m_Items: []
-      m_MaskingSettings:
-        m_MaskingEnabled: 0
-        m_UnmaskedViews: []
-  m_StartButtonLabel: Get Started
-  m_FinishButtonLabel: Go to the next tutorial
+  m_Image: {fileID: 2800000, guid: 6e279173c7e6446bfbf2744726e35598, type: 3}
+  m_WindowTitle:
+    m_Untranslated: Getting Started with Unity
+  m_Title:
+    m_Untranslated: FPS Microgame
+  m_Description:
+    m_Untranslated: "Make your own first-person shooter! \n\nIn this project, you'll
+      find preloaded scenes, scripts, audio, tutorials, and more to inspire you and
+      help you start creating.\n\nNew to Unity? Quickstart your creation journey
+      with the step-by-step <b>Tutorials.</b>\n\nReady to create? Head straight to
+      the <b>Scene.</b>"
+  m_Buttons:
+  - Text:
+      m_Untranslated: Load Scene
+    Tooltip:
+      m_Untranslated: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: CloseCurrentModalDialog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+  - Text:
+      m_Untranslated: Load Tutorials
+    Tooltip:
+      m_Untranslated: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: StartTutorial
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: CloseCurrentModalDialog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1

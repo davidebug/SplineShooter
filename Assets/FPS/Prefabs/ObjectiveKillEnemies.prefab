@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 598277302063295029}
-  - component: {fileID: 598277302063295028}
   - component: {fileID: 598277302063295019}
   - component: {fileID: 598277302063295030}
   m_Layer: 0
@@ -33,22 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &598277302063295028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598277302063295018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7535462baa2ed0d469f708cbe145b720, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: 
-  description: Defeat all the enemies in the map
-  isOptionnal: 0
-  delayVisible: 4
 --- !u!114 &598277302063295019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3cff9918d8018a44989bf444e3232f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mustKillAllEnemies: 1
-  killsToCompleteObjective: 6
-  notificationEnemiesRemainingThreshold: 0
+  Title: Eliminate all the enemies
+  Description: Defeat all the enemies in the map
+  IsOptional: 0
+  DelayVisible: 4
+  MustKillAllEnemies: 1
+  KillsToCompleteObjective: 6
+  NotificationEnemiesRemainingThreshold: 1
 --- !u!114 &598277302063295030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +63,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4170175d245c6409bb0cb4cc7b2c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Eliminate all the enemies
-  messagePrefab: {fileID: 3003312392959327722, guid: dbfc7742a2f49bf42a9a012e4ec4b773,
-    type: 3}
-  displayBeforeShowing: 0

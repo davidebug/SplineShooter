@@ -64,6 +64,7 @@ namespace Unity.FPS.Gameplay
         Vector3 m_ConsumedTrajectoryCorrectionVector;
         List<Collider> m_IgnoredColliders;
 
+        int currentPathPoint = 0;
         const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
 
         void OnEnable()
@@ -78,11 +79,13 @@ namespace Unity.FPS.Gameplay
         }
 
         new void OnShoot()
-        {
+        {   
+            currentPathPoint = 0;
             m_ShootTime = Time.time;
             m_LastRootPosition = Root.position;
             m_Velocity = transform.forward * Speed;
             m_IgnoredColliders = new List<Collider>();
+            
             transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
 
             // Ignore colliders of owner
@@ -124,7 +127,15 @@ namespace Unity.FPS.Gameplay
         void Update()
         {
             // Move
-            transform.position += m_Velocity * Time.deltaTime;
+            if(currentPathPoint == 50){
+                m_Velocity = transform.forward * Speed;
+                path = null;
+            }
+            if(path != null)
+                transform.position = Vector3.MoveTowards(transform.position, path[currentPathPoint], Speed * Time.deltaTime);
+            else{
+                transform.position += m_Velocity * Time.deltaTime;
+            }
             if (InheritWeaponVelocity)
             {
                 transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
@@ -152,14 +163,15 @@ namespace Unity.FPS.Gameplay
             }
 
             // Orient towards velocity
-            transform.forward = m_Velocity.normalized;
+            if(currentPathPoint != 50)
+                transform.forward = m_Velocity.normalized;
 
             // Gravity
-            if (GravityDownAcceleration > 0)
-            {
-                // add gravity to the projectile velocity for ballistic effect
-                m_Velocity += Vector3.down * GravityDownAcceleration * Time.deltaTime;
-            }
+            // if (GravityDownAcceleration > 0)
+            // {
+            //     // add gravity to the projectile velocity for ballistic effect
+            //      m_Velocity += Vector3.down * GravityDownAcceleration * Time.deltaTime;
+            // }
 
             // Hit detection
             {
@@ -193,7 +205,9 @@ namespace Unity.FPS.Gameplay
                     OnHit(closestHit.point, closestHit.normal, closestHit.collider);
                 }
             }
-
+            if(path != null && currentPathPoint <= 49)
+                if(Vector3.Distance(path[currentPathPoint], transform.position) < 0.2)
+                    currentPathPoint ++;
             m_LastRootPosition = Root.position;
         }
 

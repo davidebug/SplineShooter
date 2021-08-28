@@ -148,6 +148,7 @@ namespace Unity.FPS.Game
         public float CurrentCharge { get; private set; }
         public Vector3 MuzzleWorldVelocity { get; private set; }
 
+
         public float GetAmmoNeededToShoot() =>
             (ShootType != WeaponShootType.Charge ? 1f : Mathf.Max(1f, AmmoUsedOnStartCharge)) /
             (MaxAmmo * BulletsPerShot);
@@ -162,6 +163,9 @@ namespace Unity.FPS.Game
         const string k_AnimAttackParameter = "Attack";
 
         private Queue<Rigidbody> m_PhysicalAmmoPool;
+
+        int numPathPoints = 50;
+        
 
         void Awake()
         {
@@ -447,9 +451,16 @@ namespace Unity.FPS.Game
             for (int i = 0; i < bulletsPerShotFinal; i++)
             {
                 Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
+                Vector3[] path = new Vector3[numPathPoints];
+                if(CurrentCharge > 0){
+                    shotDirection = WeaponMuzzle.right;
+                    path = GetQuadraticCurve();
+                }else{
+                    path = null;
+                }    
                 ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position,
                     Quaternion.LookRotation(shotDirection));
-                newProjectile.Shoot(this);
+                newProjectile.Shoot(this, path);
             }
 
             // muzzle flash
@@ -490,6 +501,27 @@ namespace Unity.FPS.Game
             OnShootProcessed?.Invoke();
         }
 
+        public Vector3 GetQuadraticPoint(float time, Vector3 p0, Vector3 p1, Vector3 p2){
+            float a = 1 - time;
+            Vector3 newPoint = (a*a) * p0;
+            newPoint += 2 * a * time * p1;
+            newPoint += (time*time) * p2;
+            return newPoint;
+        }
+        
+        public Vector3[] GetQuadraticCurve(){
+
+            float chargePower = CurrentCharge * 15.0f;
+            Vector3 point2 = WeaponMuzzle.position + (WeaponMuzzle.right * chargePower);
+            Vector3 point3 = WeaponMuzzle.position + (WeaponMuzzle.forward * chargePower);
+            Vector3[] positions = new Vector3[numPathPoints];
+            for (int i = 1; i < numPathPoints + 1 ; i++){
+                float t = i / (float) numPathPoints;
+                positions[i-1] = GetQuadraticPoint(t,WeaponMuzzle.position, point2, point3);
+
+            }
+            return positions;
+        }
         public Vector3 GetShotDirectionWithinSpread(Transform shootTransform)
         {
             float spreadAngleRatio = BulletSpreadAngle / 180f;

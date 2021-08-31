@@ -170,6 +170,7 @@ namespace Unity.FPS.Game
 
         void Awake()
         {
+            lineRenderer = GameObject.Find("Line").GetComponent<LineRenderer>();
             m_CurrentAmmo = MaxAmmo;
             m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;
             m_LastMuzzlePosition = WeaponMuzzle.position;
@@ -413,6 +414,7 @@ namespace Unity.FPS.Game
 
         bool TryBeginCharge()
         {
+            
             if (!IsCharging
                 && m_CurrentAmmo >= AmmoUsedOnStartCharge
                 && Mathf.FloorToInt((m_CurrentAmmo - AmmoUsedOnStartCharge) * BulletsPerShot) > 0
@@ -422,7 +424,7 @@ namespace Unity.FPS.Game
 
                 LastChargeTriggerTimestamp = Time.time;
                 IsCharging = true;
-
+                lineRenderer.enabled = true;
                 return true;
             }
 
@@ -433,11 +435,12 @@ namespace Unity.FPS.Game
         {
             if (IsCharging)
             {
+                
                 HandleShoot();
 
                 CurrentCharge = 0f;
                 IsCharging = false;
-
+                lineRenderer.enabled = false;
                 return true;
             }
 
@@ -458,6 +461,7 @@ namespace Unity.FPS.Game
                 if(CurrentCharge > 0){
                     shotDirection = WeaponMuzzle.right;
                     path = GetQuadraticCurve();
+                    
                 }else{
                     path = null;
                 }    
@@ -506,7 +510,10 @@ namespace Unity.FPS.Game
 
         void UpdateCurrentTrajectory(){
             Vector3[] path = GetQuadraticCurve();
-            lineRenderer.SetPositions(path);           
+            // Vector3[] initialPosition = new Vector3[1];
+            // initialPosition[0] = WeaponMuzzle.position;
+            lineRenderer.SetPositions(path);    
+                
         }
         public Vector3 GetQuadraticPoint(float time, Vector3 p0, Vector3 p1, Vector3 p2){
             float a = 1 - time;

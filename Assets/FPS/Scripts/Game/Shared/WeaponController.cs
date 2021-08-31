@@ -148,6 +148,7 @@ namespace Unity.FPS.Game
         public float CurrentCharge { get; private set; }
         public Vector3 MuzzleWorldVelocity { get; private set; }
 
+        public LineRenderer lineRenderer;
 
         public float GetAmmoNeededToShoot() =>
             (ShootType != WeaponShootType.Charge ? 1f : Mathf.Max(1f, AmmoUsedOnStartCharge)) /
@@ -308,8 +309,10 @@ namespace Unity.FPS.Game
 
                         // set current charge ratio
                         CurrentCharge = Mathf.Clamp01(CurrentCharge + chargeAdded);
+                        
                     }
                 }
+                UpdateCurrentTrajectory();
             }
         }
 
@@ -501,6 +504,10 @@ namespace Unity.FPS.Game
             OnShootProcessed?.Invoke();
         }
 
+        void UpdateCurrentTrajectory(){
+            Vector3[] path = GetQuadraticCurve();
+            lineRenderer.SetPositions(path);           
+        }
         public Vector3 GetQuadraticPoint(float time, Vector3 p0, Vector3 p1, Vector3 p2){
             float a = 1 - time;
             Vector3 newPoint = (a*a) * p0;

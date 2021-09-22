@@ -47,7 +47,7 @@ namespace Unity.FPS.Gameplay
         public bool InheritWeaponVelocity = false;
 
         [Header("Damage")] [Tooltip("Damage of the projectile")]
-        public float Damage = 40f;
+        public float Damage = 20f;
 
         [Tooltip("Area of damage. Keep empty if you don<t want area damage")]
         public DamageArea AreaOfDamage;
@@ -127,8 +127,8 @@ namespace Unity.FPS.Gameplay
         void Update()
         {
             // Move
-            if(currentPathPoint == 50){
-                m_Velocity = transform.forward * Speed;
+            if(currentPathPoint == 100){
+                Destroy(this.gameObject);
                 path = null;
             }
             if(path != null)
@@ -163,7 +163,7 @@ namespace Unity.FPS.Gameplay
             }
 
             // Orient towards velocity
-            if(currentPathPoint != 50)
+            if(currentPathPoint != 100)
                 transform.forward = m_Velocity.normalized;
 
             // Gravity
@@ -205,7 +205,7 @@ namespace Unity.FPS.Gameplay
                     OnHit(closestHit.point, closestHit.normal, closestHit.collider);
                 }
             }
-            if(path != null && currentPathPoint <= 49)
+            if(path != null && currentPathPoint <= 99)
                 if(Vector3.Distance(path[currentPathPoint], transform.position) < 0.2)
                     currentPathPoint ++;
             m_LastRootPosition = Root.position;

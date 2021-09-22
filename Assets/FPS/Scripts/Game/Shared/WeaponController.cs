@@ -165,7 +165,7 @@ namespace Unity.FPS.Game
 
         private Queue<Rigidbody> m_PhysicalAmmoPool;
 
-        int numPathPoints = 50;
+        int numPathPoints = 100;
         
 
         void Awake()
@@ -522,18 +522,27 @@ namespace Unity.FPS.Game
             newPoint += (time*time) * p2;
             return newPoint;
         }
-        
+
         public Vector3[] GetQuadraticCurve(){
 
             float chargePower = CurrentCharge * 15.0f;
             Vector3 point2 = WeaponMuzzle.position + (WeaponMuzzle.right * chargePower);
             Vector3 point3 = WeaponMuzzle.position + (WeaponMuzzle.forward * chargePower);
             Vector3[] positions = new Vector3[numPathPoints];
-            for (int i = 1; i < numPathPoints + 1 ; i++){
-                float t = i / (float) numPathPoints;
+            for (int i = 1; i < (numPathPoints/2) + 1 ; i++){
+                float t = i / ((float) numPathPoints / 2);
                 positions[i-1] = GetQuadraticPoint(t,WeaponMuzzle.position, point2, point3);
 
             }
+
+            Vector3 point4 = WeaponMuzzle.position + (-WeaponMuzzle.right * chargePower);
+            for (int i = numPathPoints/2 ; i < numPathPoints + 1 ; i++){
+                float t = i / ((float) numPathPoints);
+                positions[i-1] = GetQuadraticPoint(t,point3, point4, WeaponMuzzle.position);
+
+            }
+
+
             return positions;
         }
         public Vector3 GetShotDirectionWithinSpread(Transform shootTransform)

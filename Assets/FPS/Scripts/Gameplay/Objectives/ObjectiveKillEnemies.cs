@@ -31,6 +31,11 @@ namespace Unity.FPS.Gameplay
                 Description = GetUpdatedCounterAmount();
         }
 
+        
+        private void Update() {
+            //TODO scan time
+        }
+
         void OnEnemyKilled(EnemyKillEvent evt)
         {
             if (IsCompleted)

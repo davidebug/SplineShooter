@@ -284,6 +284,9 @@ namespace Unity.FPS.Game
         {
             if (IsCharging)
             {
+                //TODO if is going to collide
+                lineRenderer.startColor = Color.red;
+                lineRenderer.endColor = Color.red;
                 if (CurrentCharge < 1f)
                 {
                     float chargeLeft = 1f - CurrentCharge;

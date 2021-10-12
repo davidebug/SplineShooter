@@ -16,6 +16,8 @@ namespace Unity.FPS.Gameplay
 
         int m_KillTotal;
 
+        float totalTime;
+
         protected override void Start()
         {
             base.Start();
@@ -33,7 +35,8 @@ namespace Unity.FPS.Gameplay
 
         
         private void Update() {
-            //TODO scan time
+            totalTime += Time.deltaTime;
+            print(totalTime);
         }
 
         void OnEnemyKilled(EnemyKillEvent evt)
@@ -51,7 +54,7 @@ namespace Unity.FPS.Gameplay
             // update the objective text according to how many enemies remain to kill
             if (targetRemaining == 0)
             {
-                CompleteObjective(string.Empty, GetUpdatedCounterAmount(), "Objective complete : " + Title);
+                CompleteObjective(string.Empty, GetUpdatedCounterAmount(), "Objective complete : " + Title );
             }
             else if (targetRemaining == 1)
             {

@@ -25,6 +25,8 @@ namespace Unity.FPS.Game
         public string CounterText;
         public bool IsComplete;
         public string NotificationText;
+
+        public float time;
     }
 
     public class AllObjectivesCompletedEvent : GameEvent { }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Unity.FPS.Game
 {
@@ -27,7 +28,7 @@ namespace Unity.FPS.Game
         [Header("Lose")] [Tooltip("This string has to be the name of the scene you want to load when losing")]
         public string LoseSceneName = "LoseScene";
 
-
+        public double totalTime;
         public bool GameIsEnding { get; private set; }
 
         float m_TimeLoadEndGameScene;
@@ -46,6 +47,8 @@ namespace Unity.FPS.Game
 
         void Update()
         {
+            TimeManager.Instance().updateGameTime(Time.deltaTime);
+            
             if (GameIsEnding)
             {
                 float timeRatio = 1 - (m_TimeLoadEndGameScene - Time.time) / EndSceneLoadDelay;
@@ -53,29 +56,30 @@ namespace Unity.FPS.Game
 
                 AudioUtility.SetMasterVolume(1 - timeRatio);
 
-                // See if it's time to load the end scene (after the delay)
+                
                 if (Time.time >= m_TimeLoadEndGameScene)
                 {
                     SceneManager.LoadScene(m_SceneToLoad);
+                    TimeManager.Instance().setTimeString();
                     GameIsEnding = false;
                 }
             }
         }
 
-        void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
-        void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
+        void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true, evt);
+        void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false, null);
 
-        void EndGame(bool win)
+        void EndGame(bool win, AllObjectivesCompletedEvent evt)
         {
-            // unlocks the cursor before leaving the scene, to be able to click buttons
+            
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // Remember that we need to load the appropriate end scene after a delay
+            
             GameIsEnding = true;
             EndGameFadeCanvasGroup.gameObject.SetActive(true);
-            if (win)
-            {
+            // if (win)
+            // {
                 m_SceneToLoad = WinSceneName;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
 
@@ -95,15 +99,16 @@ namespace Unity.FPS.Game
                 //}
 
                 DisplayMessageEvent displayMessage = Events.DisplayMessageEvent;
+                
                 displayMessage.Message = WinGameMessage;
                 displayMessage.DelayBeforeDisplay = DelayBeforeWinMessage;
                 EventManager.Broadcast(displayMessage);
-            }
-            else
-            {
-                m_SceneToLoad = LoseSceneName;
-                m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay;
-            }
+            // }
+            // else
+            // {
+            //     m_SceneToLoad = LoseSceneName;
+            //     m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay;
+            // }
         }
 
         void OnDestroy()

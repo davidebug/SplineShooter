@@ -28,7 +28,8 @@ namespace Unity.FPS.Game
     [RequireComponent(typeof(AudioSource))]
     public class WeaponController : MonoBehaviour
     {
-        [Header("Information")] [Tooltip("The name that will be displayed in the UI for this weapon")]
+        [Header("Information")]
+        [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;
 
         [Tooltip("The image that will be displayed in the UI for this weapon")]
@@ -47,7 +48,8 @@ namespace Unity.FPS.Game
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
         public Transform WeaponMuzzle;
 
-        [Header("Shoot Parameters")] [Tooltip("The type of weapon wil affect how it shoots")]
+        [Header("Shoot Parameters")]
+        [Tooltip("The type of weapon wil affect how it shoots")]
         public WeaponShootType ShootType;
 
         [Tooltip("The projectile prefab")] public ProjectileBase ProjectilePrefab;
@@ -61,10 +63,12 @@ namespace Unity.FPS.Game
         [Tooltip("Amount of bullets per shot")]
         public int BulletsPerShot = 1;
 
-        [Tooltip("Force that will push back the weapon after each shot")] [Range(0f, 2f)]
+        [Tooltip("Force that will push back the weapon after each shot")]
+        [Range(0f, 2f)]
         public float RecoilForce = 1;
 
-        [Tooltip("Ratio of the default FOV that this weapon applies while aiming")] [Range(0f, 1f)]
+        [Tooltip("Ratio of the default FOV that this weapon applies while aiming")]
+        [Range(0f, 1f)]
         public float AimZoomRatio = 1f;
 
         [Tooltip("Translation to apply to weapon arm when aiming with this weapon")]
@@ -107,7 +111,7 @@ namespace Unity.FPS.Game
         [Tooltip("Additional ammo used when charge reaches its maximum")]
         public float AmmoUsageRateWhileCharging = 1f;
 
-        [Header("Audio & Visual")] 
+        [Header("Audio & Visual")]
         [Tooltip("Optional weapon animator for OnShoot animations")]
         public Animator WeaponAnimator;
 
@@ -166,7 +170,7 @@ namespace Unity.FPS.Game
         private Queue<Rigidbody> m_PhysicalAmmoPool;
 
         int numPathPoints = 100;
-        
+
 
         void Awake()
         {
@@ -284,9 +288,17 @@ namespace Unity.FPS.Game
         {
             if (IsCharging)
             {
-                //TODO if is going to collide
-                lineRenderer.startColor = Color.red;
-                lineRenderer.endColor = Color.red;
+
+                
+                if (checkCollide())
+                {
+                    lineRenderer.startColor = Color.red;
+                    lineRenderer.endColor = Color.red;
+                }
+                else{
+                    lineRenderer.startColor = Color.white;
+                    lineRenderer.endColor = Color.white;
+                }
                 if (CurrentCharge < 1f)
                 {
                     float chargeLeft = 1f - CurrentCharge;
@@ -313,13 +325,37 @@ namespace Unity.FPS.Game
 
                         // set current charge ratio
                         CurrentCharge = Mathf.Clamp01(CurrentCharge + chargeAdded);
-                        
+
                     }
                 }
                 UpdateCurrentTrajectory();
             }
         }
 
+        bool checkCollide()
+        {
+
+            var gos = GameObject.FindGameObjectsWithTag("Enemy");
+            var distance = 10.0f;
+            var positions = new Vector3[numPathPoints];
+            lineRenderer.GetPositions(positions);
+            foreach (Vector3 position in positions)
+                foreach (GameObject go in gos)
+                {
+                    
+                    var diff = (go.transform.position - position);
+                    var curDistance = diff.sqrMagnitude;
+
+                    if (curDistance < distance && curDistance > distance - 5.0f)
+                    {
+
+                        distance = curDistance;
+                        return true;
+
+                    }
+                }
+            return false;
+        }
         void UpdateContinuousShootSound()
         {
             if (UseContinuousShootSound)
@@ -417,7 +453,7 @@ namespace Unity.FPS.Game
 
         bool TryBeginCharge()
         {
-            
+
             if (!IsCharging
                 && m_CurrentAmmo >= AmmoUsedOnStartCharge
                 && Mathf.FloorToInt((m_CurrentAmmo - AmmoUsedOnStartCharge) * BulletsPerShot) > 0
@@ -438,7 +474,7 @@ namespace Unity.FPS.Game
         {
             if (IsCharging)
             {
-                
+
                 HandleShoot();
 
                 CurrentCharge = 0f;
@@ -461,13 +497,16 @@ namespace Unity.FPS.Game
             {
                 Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
                 Vector3[] path = new Vector3[numPathPoints];
-                if(CurrentCharge > 0){
+                if (CurrentCharge > 0)
+                {
                     shotDirection = WeaponMuzzle.right;
                     path = GetQuadraticCurve();
-                    
-                }else{
+
+                }
+                else
+                {
                     path = null;
-                }    
+                }
                 ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position,
                     Quaternion.LookRotation(shotDirection));
                 newProjectile.Shoot(this, path);
@@ -511,37 +550,42 @@ namespace Unity.FPS.Game
             OnShootProcessed?.Invoke();
         }
 
-        void UpdateCurrentTrajectory(){
+        void UpdateCurrentTrajectory()
+        {
             Vector3[] path = GetQuadraticCurve();
             // Vector3[] initialPosition = new Vector3[1];
             // initialPosition[0] = WeaponMuzzle.position;
-            lineRenderer.SetPositions(path);    
-                
+            lineRenderer.SetPositions(path);
+
         }
-        public Vector3 GetQuadraticPoint(float time, Vector3 p0, Vector3 p1, Vector3 p2){
+        public Vector3 GetQuadraticPoint(float time, Vector3 p0, Vector3 p1, Vector3 p2)
+        {
             float a = 1 - time;
-            Vector3 newPoint = (a*a) * p0;
+            Vector3 newPoint = (a * a) * p0;
             newPoint += 2 * a * time * p1;
-            newPoint += (time*time) * p2;
+            newPoint += (time * time) * p2;
             return newPoint;
         }
 
-        public Vector3[] GetQuadraticCurve(){
+        public Vector3[] GetQuadraticCurve()
+        {
 
             float chargePower = CurrentCharge * 15.0f;
             Vector3 point2 = WeaponMuzzle.position + (WeaponMuzzle.right * chargePower);
             Vector3 point3 = WeaponMuzzle.position + (WeaponMuzzle.forward * chargePower);
             Vector3[] positions = new Vector3[numPathPoints];
-            for (int i = 1; i < (numPathPoints/2) + 1 ; i++){
-                float t = i / ((float) numPathPoints / 2);
-                positions[i-1] = GetQuadraticPoint(t,WeaponMuzzle.position, point2, point3);
+            for (int i = 1; i < (numPathPoints / 2) + 1; i++)
+            {
+                float t = i / ((float)numPathPoints / 2);
+                positions[i - 1] = GetQuadraticPoint(t, WeaponMuzzle.position, point2, point3);
 
             }
 
             Vector3 point4 = WeaponMuzzle.position + (-WeaponMuzzle.right * chargePower);
-            for (int i = numPathPoints/2 ; i < numPathPoints + 1 ; i++){
-                float t = i / ((float) numPathPoints);
-                positions[i-1] = GetQuadraticPoint(t,point3, point4, WeaponMuzzle.position);
+            for (int i = numPathPoints / 2; i < numPathPoints + 1; i++)
+            {
+                float t = i / ((float)numPathPoints);
+                positions[i - 1] = GetQuadraticPoint(t, point3, point4, WeaponMuzzle.position);
 
             }
 

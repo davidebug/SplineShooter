@@ -60,7 +60,6 @@ namespace Unity.FPS.Game
                 if (Time.time >= m_TimeLoadEndGameScene)
                 {
                     SceneManager.LoadScene(m_SceneToLoad);
-                    TimeManager.Instance().setTimeString();
                     GameIsEnding = false;
                 }
             }
@@ -78,37 +77,29 @@ namespace Unity.FPS.Game
             
             GameIsEnding = true;
             EndGameFadeCanvasGroup.gameObject.SetActive(true);
-            // if (win)
-            // {
+            if (win)
+            {
                 m_SceneToLoad = WinSceneName;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
 
-                // play a sound on win
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.clip = VictorySound;
                 audioSource.playOnAwake = false;
                 audioSource.outputAudioMixerGroup = AudioUtility.GetAudioGroup(AudioUtility.AudioGroups.HUDVictory);
                 audioSource.PlayScheduled(AudioSettings.dspTime + DelayBeforeWinMessage);
 
-                // create a game message
-                //var message = Instantiate(WinGameMessagePrefab).GetComponent<DisplayMessage>();
-                //if (message)
-                //{
-                //    message.delayBeforeShowing = delayBeforeWinMessage;
-                //    message.GetComponent<Transform>().SetAsLastSibling();
-                //}
 
                 DisplayMessageEvent displayMessage = Events.DisplayMessageEvent;
                 
                 displayMessage.Message = WinGameMessage;
                 displayMessage.DelayBeforeDisplay = DelayBeforeWinMessage;
                 EventManager.Broadcast(displayMessage);
-            // }
-            // else
-            // {
-            //     m_SceneToLoad = LoseSceneName;
-            //     m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay;
-            // }
+            }
+            else
+            {
+                m_SceneToLoad = LoseSceneName;
+                m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay;
+            }
         }
 
         void OnDestroy()

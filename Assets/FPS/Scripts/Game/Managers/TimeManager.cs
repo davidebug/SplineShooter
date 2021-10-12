@@ -2,7 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TimeManager : MonoBehaviour{
+public class TimeManager {
 
       private static TimeManager _instance;
 
@@ -11,7 +11,7 @@ public class TimeManager : MonoBehaviour{
 
             if(_instance == null)
             {
-                _instance = new TimeManager();
+                _instance =  new TimeManager();
             }
 
             return _instance;
@@ -31,11 +31,6 @@ public class TimeManager : MonoBehaviour{
         return gameTime;
     }
 
-public void setTimeString(){
-        GameObject timeObject =  GameObject.Find("Time");
-                    Text time = timeObject.GetComponent<Text>();
-                    time.text ="Total Time: "+ gameTime.ToString() + "s";
-    }
     
 
 }

@@ -16,7 +16,6 @@ namespace Unity.FPS.Gameplay
 
         int m_KillTotal;
 
-        float totalTime;
 
         protected override void Start()
         {
@@ -35,8 +34,6 @@ namespace Unity.FPS.Gameplay
 
         
         private void Update() {
-            totalTime += Time.deltaTime;
-            print(totalTime);
         }
 
         void OnEnemyKilled(EnemyKillEvent evt)

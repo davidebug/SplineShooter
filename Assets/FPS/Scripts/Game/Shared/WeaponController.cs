@@ -336,7 +336,7 @@ namespace Unity.FPS.Game
         {
 
             var gos = GameObject.FindGameObjectsWithTag("Enemy");
-            var distance = 10.0f;
+            var distance = 9.0f;
             var positions = new Vector3[numPathPoints];
             lineRenderer.GetPositions(positions);
             foreach (Vector3 position in positions)
@@ -346,7 +346,7 @@ namespace Unity.FPS.Game
                     var diff = (go.transform.position - position);
                     var curDistance = diff.sqrMagnitude;
 
-                    if (curDistance < distance && curDistance > distance - 5.0f)
+                    if (curDistance < distance)
                     {
 
                         distance = curDistance;

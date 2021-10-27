@@ -50,7 +50,7 @@ public class EnemyGenerator : MonoBehaviour {
             
             Instantiate(enemyRobot, new Vector3(xPos, 7.0f, zPos), Quaternion.identity);
         }
-        while(robotCount < 9){
+        while(robotCount < 4){
             xPos = Random.Range(-80,-5);
             zPos = Random.Range(18,120);
             

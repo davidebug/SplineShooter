@@ -553,8 +553,6 @@ namespace Unity.FPS.Game
         void UpdateCurrentTrajectory()
         {
             Vector3[] path = GetQuadraticCurve();
-            // Vector3[] initialPosition = new Vector3[1];
-            // initialPosition[0] = WeaponMuzzle.position;
             lineRenderer.SetPositions(path);
 
         }

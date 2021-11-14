@@ -126,7 +126,7 @@ namespace Unity.FPS.Gameplay
 
         void Update()
         {
-            // Move
+            // Move Projectile .. 100 = trajectory points
             if(currentPathPoint == 100){
                 Destroy(this.gameObject);
                 path = null;
@@ -140,9 +140,6 @@ namespace Unity.FPS.Gameplay
             {
                 transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
             }
-
-            // Drift towards trajectory override (this is so that projectiles can be centered 
-            // with the camera center even though the actual weapon is offset)
             if (m_HasTrajectoryOverride && m_ConsumedTrajectoryCorrectionVector.sqrMagnitude <
                 m_TrajectoryCorrectionVector.sqrMagnitude)
             {
@@ -166,12 +163,6 @@ namespace Unity.FPS.Gameplay
             if(currentPathPoint != 100)
                 transform.forward = m_Velocity.normalized;
 
-            // Gravity
-            // if (GravityDownAcceleration > 0)
-            // {
-            //     // add gravity to the projectile velocity for ballistic effect
-            //      m_Velocity += Vector3.down * GravityDownAcceleration * Time.deltaTime;
-            // }
 
             // Hit detection
             {

@@ -1,0 +1,171 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap-4.0.0/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>ORBITAL</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/product/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">ORBITAL</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="teoria.html">Teoria e Codice</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manuale.html">Manuale</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="app.html">Gioco</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      
+        <div class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white "
+        style="background-image: url('images/background2.png'); background-repeat: no-repeat;  background-size: cover;">
+        <div class="mask" style="margin-top: 30px; background-color: rgba(0, 0, 0, 0.3); border-radius: 20px;">
+            <div class="my-3 py-3">
+               
+              <h2 class="display-5 p-lg-3" >Curve e Implementazione</h2>
+             
+              <p class="lead">Il gioco utilizza traiettorie dei proiettili definite tramite punti di controllo e Curve di Beziér</p>
+            </div>
+    </div>
+      </div>
+      <h1 style= "color: black; margin-top: 20px; margin-bottom: 30px; text-align: center;" class="p-1">Teoria</h1>
+        <div class= "row">
+            <div class="col-md-5 col-sm-6 col-xs-2 bg-dark box-shadow mx-auto" style=" border-radius: 21px 21px 21px 21px;" >
+                <div class="container"  style= "padding-top: 30px; padding-bottom: 30px; text-align: center;">
+                    <img src="images/eqParam.jpg" class="img-fluid" alt="Sample Image" height="100" width="200" style="border-radius: 21px 21px 21px 21px; ">
+                    <p style= "color: white; margin-top: 20px; text-align: center;" class="lead">Una CURVA è una funzione P:(A,B)-> R3. La funzione p(t) è quindi una funzione vettoriale con le componenti di R3 (x,y,z).
+                      Una rappresentazione di una curva si dice PARAMETRICA quando la curva può essere rappresentata tramite una variabile t, il parametro. Comune è una rappresentazione in cui la forma parametrica è costituita da vari tratti di curve che si raccordano agli estremi.
+                     </p>
+                     <img src="images/bezier01.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    
+                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Nel progetto sviluppato le curve sono utilizzate per definire il moto del proiettile tramite una traiettoria visibile. Tramite curve parametriche di terzo ordine possiamo rappresentare questo tipo di movimenti che risultano i più richiesti dalla maggior parte dei videogiochi.
+                    </p>
+                    <img src="images/bezier02.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">Una curva di Beziér è una curva parametrica definita da un numero finito di punti P0,P1...Pk. Essa è costituita nello spazio attraverso l'interpolazione, in modo tale che segua l'andamento del poligono di controllo individuato dai suoi punti.
+                    </p>
+                    <img src="images/bezier03.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">Un algoritmo molto utilizzato poiché semplice ed efficiente è quello di De Casteljau: esso costruisce una curva attraverso ripetute interpolazioni lineari.
+                      <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - L'algoritmo fissa inizialmente un valore al parametro t ∈ (0,1).</p>
+                        <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Ogni coppia di punti di controllo consecutivi viene interpolata linearmente in funzione di t, ottenendo un nuovo punto.</p>
+                          <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Fissati i punti di controllo {P0, P1,..Pk}, il parametro k determina il grado della curva (k+1 per generare una curva di grado k)</p>
+                            <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Il poligono di controllo di cui avevamo parlato (Poligonale) è formato dai segmenti Ri = Pi-1, Pi con i = 0,1,...k. </p>
+                              <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">- Ottenuta la Poligonale l'algoritmo ne forma una nuova, di primo livello, formata da k punti; Partendo da questa se ne forma una nuova di secondo livello con k-1 punti; si procede così fino alla definizione del punto cui corrisponde il valore del parametro t.</p>
+                     </p>
+
+                     
+                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Curve di Beziér lineari:
+                      dati due punti P0 e P1, una curva di Beziér lineare è il segmento aventi come estremi i punti dati. (t può essere pensato come il tragitto da P0 a P1)
+                    </p>
+                    <img src="images/bezier1.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Curve di Beziér quadratiche:
+                      dati tre punti P0, P1, P2 una curva di Beziér quadratica è l'interpolazione lineare tra i punti corrispondenti appartenenti alle curve tra P0 e P1 e tra P1 e P2.
+                      Queste sono le curve che sono state utilizzate ai fini del progetto. Curve cubiche possono essere ottenute tramite l'interpolazione di curve quadratiche.
+                    </p>
+                    <img src="images/bezier2.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">- Algoritmo dei polinomi di Bernstein - 
+                      Approccio utilizzato per generare curve che offre una rappresentazione compatta dell'equazione precedentemente descritta senza ricorrere ad algoritmi ricorsivi. Se i punti di controllo sono molti può risultare più efficiente questo approccio.
+                      Bn,k(t) sono i polinomi di Bernstein. Non è altro che una combinazione lineare dei punti mediante opportuni polinomi. La sommatoria deve essere uguale ad 1.
+                    </p>
+                    <img src="images/bernstein.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px; ">
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Alcune proprietà che bisogna rispettare in questo algoritmo:</p>
+                      <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva passa in p0 e p1 (punto iniziale e finale)</p>
+                        <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è posizionata nella regione convessa delimitata dai punti</p>
+                          <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è tangente nei punti estremi a P(1)-P(0) e P(n)-P(n-1)</p>
+                   <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> Questi punti sono i punti di controllo e formano il poligono di controllo. Soltanto l'iniziale e finale appartengono alla curva, gli altri contribuiscono a modellare la curva ma non fanno parte di essa.
+                    Se modifichiamo tuttavia un punto di controllo, tutta la curva viene modificata, non solo la parte vicina al punto.
+              
+                    </p>
+                </div>
+            </div>
+                <div class="col-md-5 col-sm-6 col-xs-2 bg-light box-shadow mx-auto" style=" border-radius: 21px 21px 21px 21px;" >
+                    <div class="container"  style= "padding-top: 30px; padding-bottom: 30px;text-align: center;">
+
+                         <img src="images/projectilePath.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                         <p style= "color: black; margin-top: 20px;text-align: center;" class="lead ">Nel progetto si è scelto di utilizzare l'algoritmo di De Casteljau per semplicità:
+                          dato che il giocatore non definisce direttamente i punti di controllo, si è però pensato un modo di automatizzare il sistema di sparo tramite la definizione di punti di controllo automatici. Ogni proiettile possiede infatti un path che corrisponde alla serie di punti che formeranno la curva.
+                        </p>
+                        <img src="images/moveProjectile.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                        <p style= "color: black; margin-top: 20px;text-align: center;" class="lead ">Ogni proiettile si muove in base al path definito. Si è scelto di utilizzare una serie di 100 punti per ogni curva.
+                          
+                        </p>
+                        <img src="images/getQuadraticCurve.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                        <p style= "color: black; margin-top: 20px;text-align: center;" class="lead">I punti di controllo sono individuati a seconda della CARICA dell'arma: più si terrà premuto il pulsante di sparo più i punti di controllo saranno distanti e la curva risultante ampia.
+                        </p>
+                        <p style= "color: black; margin-top: 20px;text-align: center;" class="lead">Il primo punto di controllo corrisponde alla bocca di fuoco dell'arma del giocatore. </p>
+                          <p style= "color: black; margin-top: 20px;text-align: center;" class="lead"> Il secondo punto di controllo è posizionato sul vettore destro rispetto all'arma del giocatore. La distanza dipenderà dalla carica attuale dell'arma.</p>
+                            <p style= "color: black; margin-top: 20px;text-align: center;" class="lead"> Il terzo punto di controllo è posizionato sul vettore davanti l'arma del giocatore: anche qui la distanza dipenderà dalla carica dell'arma.</p>
+              
+                        </p>
+                        <img src="images/getQuadraticPoint.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                        <p style= "color: black; margin-top: 20px;text-align: center;" class="lead">Ogni proiettile seguirà la curva definita da questi punti di controllo, per poi tornare indietro calcolando la CURVA INVERSA rispetto alla partenza. Questa curva inversa è calcolata definendo un quarto punto di controllo che corrisponderà al vettore SINISTRO rispetto alla bocca di fuoco dell'arma.</p>
+                        <img src="images/updateCurrentTrajectory.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                        <p style= "color: black; margin-top: 20px;text-align: center;" class="lead">  L'intera traiettoria del proiettile sarà suggerita visivamente tramite una linea bianca o rossa (in presenza di nemici).
+                        </p>
+                        
+                        <img src="images/updateTrajectory.png" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 10px;">
+                        
+
+                        
+                    </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-6 col-xs-2 bg-light box-shadow mx-auto" style=" border-radius: 21px 21px 21px 21px;" >
+        <div class="container"  style= "padding-top: 30px; padding-bottom: 30px;text-align: center;">
+
+            
+        </div>
+    </div>    
+                <div class="bg-dark box-shadow mx-auto" style="width: 80%; border-radius: 21px 21px 21px 21px;" >
+                <div class="container"  style= "padding-top: 10px;text-align: center;">
+
+                  
+
+                    
+                        <p style= "color: white; margin-top: 20px;padding-bottom: 30px;" class="lead">Copyright © Davide Bagnato | davidebagnato97@gmail.com | Geometria Computazionale 2020/21 </p>
+                        
+                </div>
+                </div>
+           
+        
+      
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <!-- <script src="bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script> -->
+    <script src="bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+  </body>
+</html>

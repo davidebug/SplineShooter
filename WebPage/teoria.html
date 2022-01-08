@@ -61,19 +61,21 @@
                       Una rappresentazione di una curva si dice PARAMETRICA quando la curva può essere rappresentata tramite una variabile t, il parametro. Comune è una rappresentazione in cui la forma parametrica è costituita da vari tratti di curve che si raccordano agli estremi.
                      </p>
                      <img src="images/bezier01.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
-                    
-                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Nel progetto sviluppato le curve sono utilizzate per definire il moto del proiettile tramite una traiettoria visibile. Tramite curve parametriche di terzo ordine possiamo rappresentare questo tipo di movimenti che risultano i più richiesti dalla maggior parte dei videogiochi.
+                    <p style= "color: grey; margin-top: 5px;text-align: center;" class="body align-content-center">Calcolo di una curva di Bezier di grado 2</p>
+                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Nel progetto sviluppato le curve sono utilizzate per definire il moto del proiettile tramite una traiettoria visibile. Tramite le curve polinomiali possiamo rappresentare questo tipo di movimenti che risultano i più richiesti dalla maggior parte dei videogiochi.
                     </p>
                     <img src="images/bezier02.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
+                    <p style= "color: grey; margin-top: 5px;text-align: center;" class="body align-content-center">Calcolo di una curva di Bezier di grado 2</p>
                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">Una curva di Beziér è una curva parametrica definita da un numero finito di punti P0,P1...Pk. Essa è costituita nello spazio attraverso l'interpolazione, in modo tale che segua l'andamento del poligono di controllo individuato dai suoi punti.
                     </p>
                     <img src="images/bezier03.gif" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
-                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">Un algoritmo molto utilizzato poiché semplice ed efficiente è quello di De Casteljau: esso costruisce una curva attraverso ripetute interpolazioni lineari.
+                    <p style= "color: grey; margin-top: 5px;text-align: center;" class="body align-content-center">Calcolo di una curva di Bezier di grado 2</p>
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">Un algoritmo molto utilizzato poiché semplice ed efficiente è quello di De Casteljau: esso costruisce una curva attraverso ripetute interpolazioni lineari.</p>
                       <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - L'algoritmo fissa inizialmente un valore al parametro t ∈ (0,1).</p>
                         <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Ogni coppia di punti di controllo consecutivi viene interpolata linearmente in funzione di t, ottenendo un nuovo punto.</p>
                           <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Fissati i punti di controllo {P0, P1,..Pk}, il parametro k determina il grado della curva (k+1 per generare una curva di grado k)</p>
                             <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center"> - Il poligono di controllo di cui avevamo parlato (Poligonale) è formato dai segmenti Ri = Pi-1, Pi con i = 0,1,...k. </p>
-                              <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">- Ottenuta la Poligonale l'algoritmo ne forma una nuova, di primo livello, formata da k punti; Partendo da questa se ne forma una nuova di secondo livello con k-1 punti; si procede così fino alla definizione del punto cui corrisponde il valore del parametro t.</p>
+                              <p style= "color: white; margin-top: 20px;text-align: center;" class="lead align-content-center">- Assegnata la Poligonale l'algoritmo ne forma una nuova, di primo livello, formata da k punti; partendo da questa se ne forma una nuova di secondo livello con k-1 punti; si procede così fino alla definizione del punto cui corrisponde il valore del parametro t.</p>
                      </p>
 
                      
@@ -83,19 +85,28 @@
                     <img src="images/bezier1.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
                     <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Curve di Beziér quadratiche:
                       dati tre punti P0, P1, P2 una curva di Beziér quadratica è l'interpolazione lineare tra i punti corrispondenti appartenenti alle curve tra P0 e P1 e tra P1 e P2.
-                      Queste sono le curve che sono state utilizzate ai fini del progetto. Curve cubiche possono essere ottenute tramite l'interpolazione di curve quadratiche.
+                      Queste sono le curve che sono state utilizzate ai fini del progetto.
                     </p>
                     <img src="images/bezier2.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px;">
-                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">- Algoritmo dei polinomi di Bernstein - 
-                      Approccio utilizzato per generare curve che offre una rappresentazione compatta dell'equazione precedentemente descritta senza ricorrere ad algoritmi ricorsivi. Se i punti di controllo sono molti può risultare più efficiente questo approccio.
-                      Bn,k(t) sono i polinomi di Bernstein. Non è altro che una combinazione lineare dei punti mediante opportuni polinomi. La sommatoria deve essere uguale ad 1.
+                    <p style= "color: white; margin-top: 50px;text-align: center;" class="lead">- Approccio alternativo utillizzando i polinomi di Bernstein - </p>
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Approccio utilizzato per generare curve che offre una rappresentazione compatta dell'equazione della curva precedentemente descritta senza ricorrere ad algoritmi ricorsivi. Se i punti di controllo sono molti può risultare più efficiente questo approccio.
+                     
+                    <p style= "color: white; margin-top: 50px;text-align: center;" class="lead">* Per comodità indichiamo il grado dei polinomi con n al posto di k *</p>
+                    <p style= "color: white; margin-top: 50px;text-align: center;" class="lead">Un polinomio di Bernstein è così definito</p>
+                    <img src="images/bernstein2.png" class="img-fluid" alt="Sample Image" height="200" width="500" style="border-radius: 21px 21px 21px 21px; ">
+                      
                     </p>
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> Una delle loro proprietà fondamentali è che la loro sommatoria deve equivalere ad 1.
+                    </p>
+                    <img src="images/BernsteinPoli.jpg" class="img-fluid" alt="Sample Image" height="200" width="200" style="border-radius: 21px 21px 21px 21px; ">
+                    
+                   <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> La curva p(t) non è altro che una combinazione lineare dei punti mediante questi polinomi.</p>
                     <img src="images/bernstein.jpg" class="img-fluid" alt="Sample Image" height="400" width="550" style="border-radius: 21px 21px 21px 21px; ">
-                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Alcune proprietà che bisogna rispettare in questo algoritmo:</p>
-                      <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva passa in p0 e p1 (punto iniziale e finale)</p>
-                        <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è posizionata nella regione convessa delimitata dai punti</p>
-                          <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è tangente nei punti estremi a P(1)-P(0) e P(n)-P(n-1)</p>
-                   <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> Questi punti sono i punti di controllo e formano il poligono di controllo. Soltanto l'iniziale e finale appartengono alla curva, gli altri contribuiscono a modellare la curva ma non fanno parte di essa.
+                    <p style= "color: white; margin-top: 20px;text-align: center;" class="lead">Alcune proprietà di questo approccio:</p>
+                      <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva passa in P0 e P1 (punto iniziale e finale)</p>
+                        <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è posizionata nell'involucro convesso delimitato dai punti</p>
+                          <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> - La curva è tangente nei punti estremi a P1-P0 e Pn-P(n-1)</p>
+                   <p style= "color: white; margin-top: 20px;text-align: center;" class="lead"> I punti P0,P1,...,Pn... sono i punti di controllo e formano il poligono di controllo. Soltanto l'iniziale e finale appartengono alla curva, gli altri contribuiscono a modellare la curva ma non fanno parte di essa.
                     Se modifichiamo tuttavia un punto di controllo, tutta la curva viene modificata, non solo la parte vicina al punto.
               
                     </p>
